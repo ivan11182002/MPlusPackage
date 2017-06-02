@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="tw.com.phctw.dao.BookDao">
+    <resultMap id="BookResultMap" type="tw.com.phctw.bean.Book">
+        <id column="isbn" property="isbn" jdbcType="VARCHAR" />
+        <result column="title" property="title" jdbcType="NVARCHAR" />
+        <result column="editionNumber" property="editionNumber" jdbcType="INTEGER" />
+        <result column="copyright" property="copyright" jdbcType="VARCHAR" />
+        <result column="author" property="author" jdbcType="NVARCHAR" />
+        <result column="publisher" property="publisher" jdbcType="NVARCHAR" />
+        <result column="price" property="price" jdbcType="INTEGER" />
+    </resultMap>
+    
+    <insert id="save" parameterType="tw.com.phctw.bean.Book">
+        insert into books values (#{isbn},#{title},#{editionNumber},
+            #{copyright},#{author},#{publisher},#{price})
+    </insert>
+    
+    <update id="update" parameterType="tw.com.phctw.bean.Book">
+        update books set title=#{title}, editionNumber = #{editionNumber}, 
+            copyright = #{copyright}, author = #{author}, 
+            publisher = #{publisher}, price = #{price} where isbn = #{isbn}
+    </update>
+    
+    <delete id="delete" parameterType="java.lang.String">
+        delete from books where isbn = #{isbn}
+    </delete>
+    
+    <select id="findOne" resultMap="BookResultMap"
+            parameterType="java.lang.String">
+        select * from books where isbn = #{isbn}
+    </select>
+    
+    <select id="findAll" resultMap="BookResultMap">
+        select * from books
+    </select>
+</mapper>
