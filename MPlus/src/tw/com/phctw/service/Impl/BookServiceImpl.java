@@ -22,27 +22,22 @@ public class BookServiceImpl implements BookService {
     @Resource
     private BookDao bookDao;
 
-    @Override
     public int create( Book book ) {
         return bookDao.save( book );
     }
 
-    @Override
     public Book findOne(String isbn) {
         return bookDao.findOne( isbn );
     }
 
-    @Override
     public List<Book> findAll() {
         return bookDao.findAll();
     }
 
-    @Override
     public int update( Book book ) {
         return bookDao.update( book );
     }
 
-    @Override
     public int delete( String isbn ) {
         return bookDao.delete( isbn );
     }

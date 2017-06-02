@@ -22,32 +22,27 @@ public class TestServiceImpl implements TestService {
     @Resource
     private TestDao testDao;
 
-	@Override
 	public int create(TestBean test) {
 		// TODO Auto-generated method stub
 		testDao.save(test);
 		return 0;
 	}
 
-	@Override
 	public TestBean findOne(String isbn) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
 	public List<TestBean> findAll() {
 		// TODO Auto-generated method stub
 		return testDao.findAll();
 	}
 
-	@Override
 	public int update(TestBean test) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
-	@Override
 	public int delete(String isbn) {
 		// TODO Auto-generated method stub
 		return 0;
