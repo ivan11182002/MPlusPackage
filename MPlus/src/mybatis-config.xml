@@ -11,7 +11,9 @@
         http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
 
     <!-- 自動掃描 -->
-    <context:component-scan base-package="tw.com.phctw" />
+    <context:component-scan base-package="tw.com.phctw">
+    	<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
 
     <!-- 引入配置文件 -->
     <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
@@ -49,6 +51,4 @@
         <property name="mapperInterface" value="tw.com.phctw.dao.TestDao" />
     </bean>
     
-    <bean id="bookService" class="tw.com.phctw.service.Impl.BookServiceImpl" />
-    <bean id="testService" class="tw.com.phctw.service.Impl.TestServiceImpl" />
 </beans>  
