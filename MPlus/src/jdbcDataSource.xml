@@ -8,14 +8,15 @@
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context-3.1.xsd">
 
-	<!--<import resource="jdbcDataSource.xml"/>-->
-	<import resource="jndiDataSource.xml"/>
-	<import resource="mybatis-config.xml"/>
+	<!-- 引入配置文件 -->
+	<context:property-placeholder location="classpath:jdbc.properties"/>
 
-	<!-- 自動掃描 -->
-	<context:component-scan base-package="tw.com.phctw">
-		<context:exclude-filter type="annotation"
-			expression="org.springframework.stereotype.Controller" />
-	</context:component-scan>
+	<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="${driver}" />
+		<property name="url" value="${url}" />
+		<property name="username" value="${username}" />
+		<property name="password" value="${password}" />
+	</bean>
 
 </beans>  
