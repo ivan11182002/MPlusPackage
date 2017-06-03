@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html ng-app="App">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=BIG5">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <script src="resources/Scripts/angular1.2.js"></script>
     <script src="//unpkg.com/angular-ui-router@0.3.1/release/angular-ui-router.js"></script>
     <script src="resources/App.js"></script>
