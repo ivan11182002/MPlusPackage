@@ -8,16 +8,6 @@
         http://www.springframework.org/schema/jee
 		http://www.springframework.org/schema/jee/spring-jee.xsd">
 
-	<jee:jndi-lookup id="dataSource" jndi-name="jdbc/MPCLMUSER"/><!--
+	<jee:jndi-lookup id="dataSource" jndi-name="jdbc/MPCLMUSER"/>
 
- 	<bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
-        <property name="jndiName" value="jdbc/NSPDataSource" />
-        <property name="resourceRef" value="true" />
-	</bean>
-
-	<bean id="loginDataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
-        <property name="jndiName" value="jdbc/LOGINDataSource" />
-        <property name="resourceRef" value="true" />
-	</bean>
-
---></beans>  
+</beans>  
