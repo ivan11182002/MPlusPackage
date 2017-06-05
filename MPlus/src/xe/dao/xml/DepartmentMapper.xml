@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.DepartmentMapper">
+  <resultMap id="BaseResultMap" type="model.Department">
+    <id column="DEPARTMENT_ID" jdbcType="DECIMAL" property="departmentId" />
+    <result column="DEPARTMENT_NAME" jdbcType="VARCHAR" property="departmentName" />
+    <result column="MANAGER_ID" jdbcType="DECIMAL" property="managerId" />
+    <result column="LOCATION_ID" jdbcType="DECIMAL" property="locationId" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    DEPARTMENT_ID, DEPARTMENT_NAME, MANAGER_ID, LOCATION_ID
+  </sql>
+  <select id="selectByExample" parameterType="model.DepartmentExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from MPCLMUSER.DEPARTMENTS
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from MPCLMUSER.DEPARTMENTS
+    where DEPARTMENT_ID = #{departmentId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from MPCLMUSER.DEPARTMENTS
+    where DEPARTMENT_ID = #{departmentId,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="model.DepartmentExample">
+    delete from MPCLMUSER.DEPARTMENTS
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="model.Department">
+    <selectKey keyProperty="departmentId" order="BEFORE" resultType="java.lang.Long">
+      select DEPARTMENTS_SEQ.NEXTVAL from dual
+    </selectKey>
+    insert into MPCLMUSER.DEPARTMENTS (DEPARTMENT_ID, DEPARTMENT_NAME, MANAGER_ID, 
+      LOCATION_ID)
+    values (#{departmentId,jdbcType=DECIMAL}, #{departmentName,jdbcType=VARCHAR}, #{managerId,jdbcType=DECIMAL}, 
+      #{locationId,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="model.Department">
+    <selectKey keyProperty="departmentId" order="BEFORE" resultType="java.lang.Long">
+      select DEPARTMENTS_SEQ.NEXTVAL from dual
+    </selectKey>
+    insert into MPCLMUSER.DEPARTMENTS
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      DEPARTMENT_ID,
+      <if test="departmentName != null">
+        DEPARTMENT_NAME,
+      </if>
+      <if test="managerId != null">
+        MANAGER_ID,
+      </if>
+      <if test="locationId != null">
+        LOCATION_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      #{departmentId,jdbcType=DECIMAL},
+      <if test="departmentName != null">
+        #{departmentName,jdbcType=VARCHAR},
+      </if>
+      <if test="managerId != null">
+        #{managerId,jdbcType=DECIMAL},
+      </if>
+      <if test="locationId != null">
+        #{locationId,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="model.DepartmentExample" resultType="java.lang.Long">
+    select count(*) from MPCLMUSER.DEPARTMENTS
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update MPCLMUSER.DEPARTMENTS
+    <set>
+      <if test="record.departmentId != null">
+        DEPARTMENT_ID = #{record.departmentId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.departmentName != null">
+        DEPARTMENT_NAME = #{record.departmentName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.managerId != null">
+        MANAGER_ID = #{record.managerId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.locationId != null">
+        LOCATION_ID = #{record.locationId,jdbcType=DECIMAL},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update MPCLMUSER.DEPARTMENTS
+    set DEPARTMENT_ID = #{record.departmentId,jdbcType=DECIMAL},
+      DEPARTMENT_NAME = #{record.departmentName,jdbcType=VARCHAR},
+      MANAGER_ID = #{record.managerId,jdbcType=DECIMAL},
+      LOCATION_ID = #{record.locationId,jdbcType=DECIMAL}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="model.Department">
+    update MPCLMUSER.DEPARTMENTS
+    <set>
+      <if test="departmentName != null">
+        DEPARTMENT_NAME = #{departmentName,jdbcType=VARCHAR},
+      </if>
+      <if test="managerId != null">
+        MANAGER_ID = #{managerId,jdbcType=DECIMAL},
+      </if>
+      <if test="locationId != null">
+        LOCATION_ID = #{locationId,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where DEPARTMENT_ID = #{departmentId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="model.Department">
+    update MPCLMUSER.DEPARTMENTS
+    set DEPARTMENT_NAME = #{departmentName,jdbcType=VARCHAR},
+      MANAGER_ID = #{managerId,jdbcType=DECIMAL},
+      LOCATION_ID = #{locationId,jdbcType=DECIMAL}
+    where DEPARTMENT_ID = #{departmentId,jdbcType=DECIMAL}
+  </update>
+</mapper>
