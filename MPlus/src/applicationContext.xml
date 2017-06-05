@@ -8,12 +8,16 @@
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context-3.1.xsd">
 
-	<!--<import resource="jdbcDataSource.xml"/>-->
-	<import resource="jndiDataSource.xml"/>
+	<import resource="jdbcDataSource.xml"/>
+	<!--<import resource="jndiDataSource.xml"/>-->
 	<import resource="mybatis-config.xml"/>
 
 	<!-- 自動掃描 -->
-	<context:component-scan base-package="tw.com.phctw">
+	<!--<context:component-scan base-package="tw.com.phctw">
+		<context:exclude-filter type="annotation"
+			expression="org.springframework.stereotype.Controller" />
+	</context:component-scan>-->
+	<context:component-scan base-package="xe">
 		<context:exclude-filter type="annotation"
 			expression="org.springframework.stereotype.Controller" />
 	</context:component-scan>

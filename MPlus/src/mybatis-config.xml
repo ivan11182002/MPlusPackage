@@ -15,10 +15,12 @@
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
 		<!-- 自動掃描mapping.xml文件 -->
-		<property name="mapperLocations" value="classpath*:tw/com/phctw/mapper/*.xml"></property>
+		<!--<property name="mapperLocations" value="classpath*:tw/com/phctw/mapper/*.xml"></property>-->
+		<property name="mapperLocations" value="classpath*:xe/dao/xml/*.xml"></property>
 	</bean>
 
-	<mybatis:scan base-package="tw.com.phctw.dao" />
+	<!--<mybatis:scan base-package="tw.com.phctw.dao" />-->
+	<mybatis:scan base-package="xe.dao.mapper" />
 
 	<!-- DAO接口所在包名，Spring會自動查找其下的類 -->
 
