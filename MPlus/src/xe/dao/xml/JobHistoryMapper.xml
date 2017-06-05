@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="mapper.JobHistoryMapper">
-  <resultMap id="BaseResultMap" type="model.JobHistory">
+<mapper namespace="xe.dao.mapper.JobHistoryMapper">
+  <resultMap id="BaseResultMap" type="xe.bean.JobHistory">
     <id column="EMPLOYEE_ID" jdbcType="DECIMAL" property="employeeId" />
     <id column="START_DATE" jdbcType="DATE" property="startDate" />
     <result column="END_DATE" jdbcType="DATE" property="endDate" />
@@ -69,7 +69,7 @@
   <sql id="Base_Column_List">
     EMPLOYEE_ID, START_DATE, END_DATE, JOB_ID, DEPARTMENT_ID
   </sql>
-  <select id="selectByExample" parameterType="model.JobHistoryExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="xe.dao.example.JobHistoryExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -83,31 +83,31 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" parameterType="model.JobHistoryKey" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" parameterType="xe.bean.JobHistoryKey" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from MPCLMUSER.JOB_HISTORY
     where EMPLOYEE_ID = #{employeeId,jdbcType=DECIMAL}
       and START_DATE = #{startDate,jdbcType=DATE}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="model.JobHistoryKey">
+  <delete id="deleteByPrimaryKey" parameterType="xe.bean.JobHistoryKey">
     delete from MPCLMUSER.JOB_HISTORY
     where EMPLOYEE_ID = #{employeeId,jdbcType=DECIMAL}
       and START_DATE = #{startDate,jdbcType=DATE}
   </delete>
-  <delete id="deleteByExample" parameterType="model.JobHistoryExample">
+  <delete id="deleteByExample" parameterType="xe.dao.example.JobHistoryExample">
     delete from MPCLMUSER.JOB_HISTORY
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="model.JobHistory">
+  <insert id="insert" parameterType="xe.bean.JobHistory">
     insert into MPCLMUSER.JOB_HISTORY (EMPLOYEE_ID, START_DATE, END_DATE, 
       JOB_ID, DEPARTMENT_ID)
     values (#{employeeId,jdbcType=DECIMAL}, #{startDate,jdbcType=DATE}, #{endDate,jdbcType=DATE}, 
       #{jobId,jdbcType=VARCHAR}, #{departmentId,jdbcType=DECIMAL})
   </insert>
-  <insert id="insertSelective" parameterType="model.JobHistory">
+  <insert id="insertSelective" parameterType="xe.bean.JobHistory">
     insert into MPCLMUSER.JOB_HISTORY
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="employeeId != null">
@@ -144,7 +144,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="model.JobHistoryExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="xe.dao.example.JobHistoryExample" resultType="java.lang.Long">
     select count(*) from MPCLMUSER.JOB_HISTORY
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -184,7 +184,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="model.JobHistory">
+  <update id="updateByPrimaryKeySelective" parameterType="xe.bean.JobHistory">
     update MPCLMUSER.JOB_HISTORY
     <set>
       <if test="endDate != null">
@@ -200,7 +200,7 @@
     where EMPLOYEE_ID = #{employeeId,jdbcType=DECIMAL}
       and START_DATE = #{startDate,jdbcType=DATE}
   </update>
-  <update id="updateByPrimaryKey" parameterType="model.JobHistory">
+  <update id="updateByPrimaryKey" parameterType="xe.bean.JobHistory">
     update MPCLMUSER.JOB_HISTORY
     set END_DATE = #{endDate,jdbcType=DATE},
       JOB_ID = #{jobId,jdbcType=VARCHAR},

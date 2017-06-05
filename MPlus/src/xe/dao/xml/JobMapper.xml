@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="mapper.JobMapper">
-  <resultMap id="BaseResultMap" type="model.Job">
+<mapper namespace="xe.dao.mapper.JobMapper">
+  <resultMap id="BaseResultMap" type="xe.bean.Job">
     <id column="JOB_ID" jdbcType="VARCHAR" property="jobId" />
     <result column="JOB_TITLE" jdbcType="VARCHAR" property="jobTitle" />
     <result column="MIN_SALARY" jdbcType="DECIMAL" property="minSalary" />
@@ -68,7 +68,7 @@
   <sql id="Base_Column_List">
     JOB_ID, JOB_TITLE, MIN_SALARY, MAX_SALARY
   </sql>
-  <select id="selectByExample" parameterType="model.JobExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="xe.dao.example.JobExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -92,19 +92,19 @@
     delete from MPCLMUSER.JOBS
     where JOB_ID = #{jobId,jdbcType=VARCHAR}
   </delete>
-  <delete id="deleteByExample" parameterType="model.JobExample">
+  <delete id="deleteByExample" parameterType="xe.dao.example.JobExample">
     delete from MPCLMUSER.JOBS
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="model.Job">
+  <insert id="insert" parameterType="xe.bean.Job">
     insert into MPCLMUSER.JOBS (JOB_ID, JOB_TITLE, MIN_SALARY, 
       MAX_SALARY)
     values (#{jobId,jdbcType=VARCHAR}, #{jobTitle,jdbcType=VARCHAR}, #{minSalary,jdbcType=DECIMAL}, 
       #{maxSalary,jdbcType=DECIMAL})
   </insert>
-  <insert id="insertSelective" parameterType="model.Job">
+  <insert id="insertSelective" parameterType="xe.bean.Job">
     insert into MPCLMUSER.JOBS
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="jobId != null">
@@ -135,7 +135,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="model.JobExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="xe.dao.example.JobExample" resultType="java.lang.Long">
     select count(*) from MPCLMUSER.JOBS
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -171,7 +171,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="model.Job">
+  <update id="updateByPrimaryKeySelective" parameterType="xe.bean.Job">
     update MPCLMUSER.JOBS
     <set>
       <if test="jobTitle != null">
@@ -186,7 +186,7 @@
     </set>
     where JOB_ID = #{jobId,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="model.Job">
+  <update id="updateByPrimaryKey" parameterType="xe.bean.Job">
     update MPCLMUSER.JOBS
     set JOB_TITLE = #{jobTitle,jdbcType=VARCHAR},
       MIN_SALARY = #{minSalary,jdbcType=DECIMAL},

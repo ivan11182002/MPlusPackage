@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="mapper.DepartmentMapper">
-  <resultMap id="BaseResultMap" type="model.Department">
+<mapper namespace="xe.dao.mapper.DepartmentMapper">
+  <resultMap id="BaseResultMap" type="xe.bean.Department">
     <id column="DEPARTMENT_ID" jdbcType="DECIMAL" property="departmentId" />
     <result column="DEPARTMENT_NAME" jdbcType="VARCHAR" property="departmentName" />
     <result column="MANAGER_ID" jdbcType="DECIMAL" property="managerId" />
@@ -68,7 +68,7 @@
   <sql id="Base_Column_List">
     DEPARTMENT_ID, DEPARTMENT_NAME, MANAGER_ID, LOCATION_ID
   </sql>
-  <select id="selectByExample" parameterType="model.DepartmentExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="xe.dao.example.DepartmentExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -92,13 +92,13 @@
     delete from MPCLMUSER.DEPARTMENTS
     where DEPARTMENT_ID = #{departmentId,jdbcType=DECIMAL}
   </delete>
-  <delete id="deleteByExample" parameterType="model.DepartmentExample">
+  <delete id="deleteByExample" parameterType="xe.dao.example.DepartmentExample">
     delete from MPCLMUSER.DEPARTMENTS
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="model.Department">
+  <insert id="insert" parameterType="xe.bean.Department">
     <selectKey keyProperty="departmentId" order="BEFORE" resultType="java.lang.Long">
       select DEPARTMENTS_SEQ.NEXTVAL from dual
     </selectKey>
@@ -107,7 +107,7 @@
     values (#{departmentId,jdbcType=DECIMAL}, #{departmentName,jdbcType=VARCHAR}, #{managerId,jdbcType=DECIMAL}, 
       #{locationId,jdbcType=DECIMAL})
   </insert>
-  <insert id="insertSelective" parameterType="model.Department">
+  <insert id="insertSelective" parameterType="xe.bean.Department">
     <selectKey keyProperty="departmentId" order="BEFORE" resultType="java.lang.Long">
       select DEPARTMENTS_SEQ.NEXTVAL from dual
     </selectKey>
@@ -137,7 +137,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="model.DepartmentExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="xe.dao.example.DepartmentExample" resultType="java.lang.Long">
     select count(*) from MPCLMUSER.DEPARTMENTS
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -173,7 +173,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="model.Department">
+  <update id="updateByPrimaryKeySelective" parameterType="xe.bean.Department">
     update MPCLMUSER.DEPARTMENTS
     <set>
       <if test="departmentName != null">
@@ -188,7 +188,7 @@
     </set>
     where DEPARTMENT_ID = #{departmentId,jdbcType=DECIMAL}
   </update>
-  <update id="updateByPrimaryKey" parameterType="model.Department">
+  <update id="updateByPrimaryKey" parameterType="xe.bean.Department">
     update MPCLMUSER.DEPARTMENTS
     set DEPARTMENT_NAME = #{departmentName,jdbcType=VARCHAR},
       MANAGER_ID = #{managerId,jdbcType=DECIMAL},

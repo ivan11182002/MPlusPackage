@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="mapper.RegionMapper">
-  <resultMap id="BaseResultMap" type="model.Region">
+<mapper namespace="xe.dao.mapper.RegionMapper">
+  <resultMap id="BaseResultMap" type="xe.bean.Region">
     <id column="REGION_ID" jdbcType="DECIMAL" property="regionId" />
     <result column="REGION_NAME" jdbcType="VARCHAR" property="regionName" />
   </resultMap>
@@ -66,7 +66,7 @@
   <sql id="Base_Column_List">
     REGION_ID, REGION_NAME
   </sql>
-  <select id="selectByExample" parameterType="model.RegionExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="xe.dao.example.RegionExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -90,17 +90,17 @@
     delete from MPCLMUSER.REGIONS
     where REGION_ID = #{regionId,jdbcType=DECIMAL}
   </delete>
-  <delete id="deleteByExample" parameterType="model.RegionExample">
+  <delete id="deleteByExample" parameterType="xe.dao.example.RegionExample">
     delete from MPCLMUSER.REGIONS
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="model.Region">
+  <insert id="insert" parameterType="xe.bean.Region">
     insert into MPCLMUSER.REGIONS (REGION_ID, REGION_NAME)
     values (#{regionId,jdbcType=DECIMAL}, #{regionName,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="model.Region">
+  <insert id="insertSelective" parameterType="xe.bean.Region">
     insert into MPCLMUSER.REGIONS
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="regionId != null">
@@ -119,7 +119,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="model.RegionExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="xe.dao.example.RegionExample" resultType="java.lang.Long">
     select count(*) from MPCLMUSER.REGIONS
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -147,7 +147,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="model.Region">
+  <update id="updateByPrimaryKeySelective" parameterType="xe.bean.Region">
     update MPCLMUSER.REGIONS
     <set>
       <if test="regionName != null">
@@ -156,7 +156,7 @@
     </set>
     where REGION_ID = #{regionId,jdbcType=DECIMAL}
   </update>
-  <update id="updateByPrimaryKey" parameterType="model.Region">
+  <update id="updateByPrimaryKey" parameterType="xe.bean.Region">
     update MPCLMUSER.REGIONS
     set REGION_NAME = #{regionName,jdbcType=VARCHAR}
     where REGION_ID = #{regionId,jdbcType=DECIMAL}
